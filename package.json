@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js"
+    "test": "npx cucumber-js --format @cucumber/pretty-formatter --format json:allure-results/results.json"
   },
   "keywords": [],
   "author": "",

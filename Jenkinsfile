@@ -36,15 +36,13 @@ pipeline {
             }
         }
 
-        stage('Publish Reports') {
-            when {
-                expression { fileExists('allure-results') }
-            }
+       stage('Publish Reports') {
             steps {
                 echo '📊 Publishing Allure reports...'
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
+
     }
 
     post {
