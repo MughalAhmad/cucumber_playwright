@@ -30,12 +30,12 @@ When('providing valid username as {string}, password as {string} and submit', as
     setDefaultTimeout(30000);
 });
 
-// When('providing valid username, password and submit', async function () {
-//     await page.locator("//input[@name='userName']").fill('mercury');
-//     await page.locator("//input[@name='password']").fill('mercury');
-//     await page.locator("//input[@name='submit']").click();
-//     setDefaultTimeout(10000);
-// });
+When('providing valid username, password and submit', async function () {
+    await page.locator("//input[@name='userName']").fill('mercury');
+    await page.locator("//input[@name='password']").fill('mercury');
+    await page.locator("//input[@name='submit']").click();
+    setDefaultTimeout(10000);
+});
 
 Then('checking is Login Successfully find', async function () {
   const title = await page.title();
