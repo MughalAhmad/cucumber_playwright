@@ -22,12 +22,12 @@ pipeline {
             }
         }
 
-        stage('Install Playwright Browsers') {
-            steps {
-                echo '🌐 Installing Playwright browsers...'
-                bat 'npx playwright install'
-            }
-        }
+        // stage('Install Playwright Browsers') {
+        //     steps {
+        //         echo '🌐 Installing Playwright browsers...'
+        //         bat 'npx playwright install'
+        //     }
+        // }
 
         stage('Run Cucumber Tests') {
             steps {
