@@ -1,44 +1,57 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "NodeJS_18" // Define Node version (configured in Jenkins)
+    environment {
+        NODEJS_HOME = tool name: 'NodeJS_18', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                git 'https://github.com/MughalAhmad/cucumber_playwright.git'
+                echo '📦 Cloning repository...'
+                git branch: 'main', url: 'https://github.com/MughalAhmad/cucumber_playwright.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                echo '📥 Installing project dependencies...'
+                bat 'npm install'
             }
         }
 
-        stage('Run Playwright Tests') {
+        stage('Install Playwright Browsers') {
             steps {
-                sh 'npx playwright install'
-                sh 'npm run test'
+                echo '🌐 Installing Playwright browsers...'
+                bat 'npx playwright install'
+            }
+        }
+
+        stage('Run Cucumber Tests') {
+            steps {
+                echo '🚀 Running Cucumber + Playwright tests...'
+                bat 'npx cucumber-js'
             }
         }
 
         stage('Publish Reports') {
+            when {
+                expression { fileExists('allure-results') }
+            }
             steps {
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    results: [[path: 'allure-results']]
-                ])
+                echo '📊 Publishing Allure reports...'
+                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
     }
 
     post {
-        always {
-            archiveArtifacts artifacts: 'reports/**', fingerprint: true
+        success {
+            echo '✅ All tests executed successfully!'
+        }
+        failure {
+            echo '❌ Build failed. Check the logs for details.'
         }
     }
 }

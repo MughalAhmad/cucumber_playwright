@@ -2,6 +2,7 @@ const  { Given, When, Then } = require("@cucumber/cucumber");
 
 Given('checking demo', function () {
     console.log("Given")
+    
 });
 
 When('print same message', function () {
