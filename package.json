@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js --require tests/step/**/*.js --publish-quiet"
+    "test": "npx cucumber-js"
   },
   "keywords": [],
   "author": "",
