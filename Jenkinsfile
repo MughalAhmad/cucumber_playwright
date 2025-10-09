@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo '📦 Cloning repository...'
-                git branch: 'main', url: 'https://github.com/MughalAhmad/cucumber_playwright.git'
+                git branch: 'test', url: 'https://github.com/MughalAhmad/cucumber_playwright.git'
             }
         }
 
