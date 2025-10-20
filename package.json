@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js --format @cucumber/pretty-formatter --format json:allure-results/results.json"
+    "test": "npx cucumber-js --format @cucumber/pretty-formatter --format json:allure-results/results.json",
+    "report": "node generateReport.js",
+    "test:report": "npm run test && npm run report"
   },
   "keywords": [],
   "author": "",

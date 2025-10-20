@@ -1,0 +1,146 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-for-mercury-newtours;login-with-valid-username-and-password-pass-value-in-step",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "login with valid username and password pass value in step",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "providing valid url",
+            "match": {
+              "location": "tests\\steps\\login.js:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52471815399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "providing valid username as \"ahmad.support\", password as \"123\" and submit",
+            "match": {
+              "location": "tests\\steps\\login.js:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6833285300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "checking is Login Successfully find",
+            "match": {
+              "location": "tests\\steps\\login.js:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6612612400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "select inventory dropdown and select Sales invoice option",
+            "match": {
+              "location": "tests\\steps\\login.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2296856799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "enter sale no 57 and press enter seacrh button",
+            "match": {
+              "location": "tests\\steps\\login.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110648600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "click new button to create new sales invoice",
+            "match": {
+              "location": "tests\\steps\\login.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5638541899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "enter one item and press post button to save sales invoice",
+            "match": {
+              "location": "tests\\steps\\login.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 17624946899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "press list button to go sales invoice list page",
+            "match": {
+              "location": "tests\\steps\\login.js:112"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12641877300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "filter out that sale which you created just now and verify it exists in list page",
+            "match": {
+              "location": "tests\\steps\\login.js:123"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 515853700
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-for-mercury-newtours",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "login for mercury newtours",
+    "tags": [],
+    "uri": "tests\\features\\login.feature"
+  }
+]
