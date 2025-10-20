@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo '📦 Cloning repository...'
-                git branch: 'main', url: 'https://github.com/MughalAhmad/cucumber_playwright.git'
+                git branch: 'test', url: 'https://github.com/MughalAhmad/cucumber_playwright.git'
             }
         }
 
@@ -22,12 +22,12 @@ pipeline {
             }
         }
 
-        stage('Install Playwright Browsers') {
-            steps {
-                echo '🌐 Installing Playwright browsers...'
-                bat 'npx playwright install'
-            }
-        }
+        // stage('Install Playwright Browsers') {
+        //     steps {
+        //         echo '🌐 Installing Playwright browsers...'
+        //         bat 'npx playwright install'
+        //     }
+        // }
 
         stage('Run Cucumber Tests') {
             steps {
@@ -36,15 +36,13 @@ pipeline {
             }
         }
 
-        stage('Publish Reports') {
-            when {
-                expression { fileExists('allure-results') }
-            }
+       stage('Publish Reports') {
             steps {
                 echo '📊 Publishing Allure reports...'
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
+
     }
 
     post {

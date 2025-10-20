@@ -1,15 +1,19 @@
 {
-    "default":{
-        "formateOptions":{
+    "default": {
+        "formateOptions": {
             "snippentInterface": "async-await"
         },
-        "paths":[
+        "paths": [
             "tests/features/*.feature"
         ],
         "publishQuite": true,
         "dryRun": false,
-        "require":[
+        "require": [
             "tests/steps/*.js"
+        ],
+        "format": [
+            "json:reports/cucumber_report.json",
+            "progress"
         ]
     }
 }
