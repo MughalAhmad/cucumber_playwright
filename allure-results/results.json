@@ -14,150 +14,150 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 559176400
+              "duration": 683072799
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 9,
+            "line": 5,
             "name": "providing valid url",
             "match": {
-              "location": "tests\\steps\\login.js:16"
+              "location": "tests\\steps\\login.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 24230414500
+              "duration": 27492285899
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 10,
+            "line": 9,
             "name": "providing valid username as \"ahmad.support\", password as \"123\" and submit",
             "match": {
-              "location": "tests\\steps\\login.js:21"
+              "location": "tests\\steps\\login.js:11"
             },
             "result": {
               "status": "passed",
-              "duration": 5440110700
+              "duration": 4443253699
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 11,
+            "line": 10,
             "name": "checking is Login Successfully find",
             "match": {
-              "location": "tests\\steps\\login.js:26"
+              "location": "tests\\steps\\login.js:15"
             },
             "result": {
               "status": "passed",
-              "duration": 25926999
+              "duration": 53875500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "select inventory dropdown and select Sales invoice option",
+            "match": {
+              "location": "tests\\steps\\login.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 254923600
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 12,
-            "name": "select inventory dropdown and select Sales invoice option",
+            "name": "enter sale no 57 and press enter seacrh button",
             "match": {
-              "location": "tests\\steps\\login.js:33"
+              "location": "tests\\steps\\login.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 237388600
+              "duration": 146764199
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 13,
-            "name": "enter sale no 57 and press enter seacrh button",
+            "name": "click new button to create new sales invoice",
             "match": {
-              "location": "tests\\steps\\login.js:56"
+              "location": "tests\\steps\\login.js:53"
             },
             "result": {
               "status": "passed",
-              "duration": 127675699
+              "duration": 1504055300
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 14,
-            "name": "click new button to create new sales invoice",
+            "name": "enter one item and press post button to save sales invoice",
             "match": {
-              "location": "tests\\steps\\login.js:66"
+              "location": "tests\\steps\\login.js:60"
             },
             "result": {
               "status": "passed",
-              "duration": 2016324200
+              "duration": 2102563399
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 15,
-            "name": "enter one item and press post button to save sales invoice",
+            "name": "press list button to go sales invoice list page",
             "match": {
-              "location": "tests\\steps\\login.js:73"
+              "location": "tests\\steps\\login.js:65"
             },
             "result": {
               "status": "passed",
-              "duration": 6199881699
+              "duration": 14272299500
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 16,
-            "name": "press list button to go sales invoice list page",
+            "name": "filter out that sale which you created just now and verify it exists in list page",
             "match": {
-              "location": "tests\\steps\\login.js:78"
+              "location": "tests\\steps\\login.js:70"
             },
             "result": {
               "status": "passed",
-              "duration": 12655951200
+              "duration": 26317199
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 17,
-            "name": "filter out that sale which you created just now and verify it exists in list page",
+            "name": "logout from application",
             "match": {
-              "location": "tests\\steps\\login.js:83"
+              "location": "tests\\steps\\login.js:74"
             },
             "result": {
               "status": "passed",
-              "duration": 24816700
+              "duration": 3288338100
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 18,
-            "name": "logout from application",
+            "name": "again login with same username as \"ahmad.support\", password as \"123\" and submit",
             "match": {
-              "location": "tests\\steps\\login.js:87"
+              "location": "tests\\steps\\login.js:79"
             },
             "result": {
               "status": "passed",
-              "duration": 13488061000
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 19,
-            "name": "again login with same user",
-            "match": {
-              "location": "tests\\steps\\login.js:92"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 16568418899
+              "duration": 5343564200
             }
           },
           {
@@ -165,7 +165,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 1448999
+              "duration": 2372500
             }
           }
         ],

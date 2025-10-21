@@ -1,5 +1,4 @@
 const { chromium } = require('playwright');
-const { setWorldConstructor } = require('@cucumber/cucumber');
 const { LoginPage } = require("../page_obj/login");
 
 class CustomWorld {
@@ -14,6 +13,4 @@ class CustomWorld {
   }
 }
 
-setWorldConstructor(CustomWorld);
-
-module.exports = { CustomWorld, setWorldConstructor };
+module.exports = { CustomWorld };

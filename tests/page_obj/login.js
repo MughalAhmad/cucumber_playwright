@@ -12,6 +12,10 @@ class LoginPage {
         this.listBtn = page.getByRole('link', { name: 'List' });
         this.logoutDropdown = page.locator("a[class='dropdown-toggle']");
         this.logoutBtn = page.getByRole('link', { name: 'Logout' });
+        this.userNameInput = page.locator("//input[@placeholder='User Name']");
+        this.passwordInput = page.locator("//input[@placeholder='Password']");
+        this.submitButton = page.locator("//button[@type='submit']");
+        this.sweetAlertConfirmButton = page.locator("//button[contains(@class,'swal2-confirm')]");
     }
 
     async gotoUrl() {
@@ -24,10 +28,11 @@ class LoginPage {
 
     // login using the page instance attached to this class
     async login(name, password) {
-        await this.page.locator("//input[@placeholder='User Name']").fill(name);
-        await this.page.locator("//input[@placeholder='Password']").fill(password);
-        await this.page.locator("//button[@type='submit']").click();
-        await this.page.locator("//button[contains(@class,'swal2-confirm')]").click();
+        // userNameInput/passwordInput/submitButton are already locators
+        await this.userNameInput.fill(name);
+        await this.passwordInput.fill(password);
+        await this.submitButton.click();
+        await this.sweetAlertConfirmButton.click({ timeout: 3000 });
         await this.page.waitForLoadState('networkidle');
     }
 

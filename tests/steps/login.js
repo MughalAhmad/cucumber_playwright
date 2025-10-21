@@ -1,17 +1,7 @@
-const { Given, When, Then, setDefaultTimeout, Before, After } = require("@cucumber/cucumber");
+const { Given, When, Then, setDefaultTimeout } = require("@cucumber/cucumber");
 const { expect } = require('@playwright/test');
-const {CustomWorld, setWorldConstructor, } = require('../world/customWorld');
 
-setWorldConstructor(CustomWorld);
 setDefaultTimeout(60000);
-
-Before(async function () {
-  await this.init(); // from CustomWorld
-});
-
-After(async function () {
-  await this.close();
-});
 
 Given('providing valid url', async function () {
   setDefaultTimeout(10000);
@@ -86,8 +76,8 @@ Then('logout from application', async function () {
   await this.loginPage.click(this.loginPage.logoutBtn);
 });
 
-Then('again login with same user', async function () {
-  await this.loginPage.login('ahmad.support', '123');
+Then('again login with same username as {string}, password as {string} and submit', async function (name, password) {
+  await this.loginPage.login(name, password);
   await this.page.title();
   await expect(this.page).toHaveTitle(/Dashboard/i, { timeout: 20000 }); // regex makes it case-insensitive
   await this.page.close();
