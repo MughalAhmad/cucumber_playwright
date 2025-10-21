@@ -15,3 +15,5 @@ Scenario: login with valid username and password pass value in step
     And  enter one item and press post button to save sales invoice
     And press list button to go sales invoice list page
     And filter out that sale which you created just now and verify it exists in list page
+    And logout from application
+    And again login with same user

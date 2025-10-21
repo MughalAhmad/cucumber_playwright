@@ -1,51 +1,41 @@
-const  { Given, When, Then, setDefaultTimeout } = require("@cucumber/cucumber");
-const {chromium, expect} = require('@playwright/test');
-const { get } = require("http");
+const { Given, When, Then, setDefaultTimeout, Before, After } = require("@cucumber/cucumber");
+const { expect } = require('@playwright/test');
+const {CustomWorld, setWorldConstructor, } = require('../world/customWorld');
 
-let browser;
-let page;
-// ✅ Set default timeout globally (e.g., 60 seconds)
+setWorldConstructor(CustomWorld);
 setDefaultTimeout(60000);
 
-Given('providing valid url', async function () {
-    browser = await chromium.launch({ headless: false });
-    page = await browser.newPage();
-    setDefaultTimeout(10000);
-    await page.goto("https://quicktijarat.com/ng/security/login", {
-        waitUntil: 'networkidle', // Wait until all network requests are done
-        timeout: 60000 // optional: wait up to 60 seconds
-    });
+Before(async function () {
+  await this.init(); // from CustomWorld
+});
 
-  // Ensure login form is visible
-  await page.waitForSelector("//input[@placeholder='User Name']", { timeout: 30000 });
+After(async function () {
+  await this.close();
+});
+
+Given('providing valid url', async function () {
+  setDefaultTimeout(10000);
+  await this.loginPage.gotoUrl();
 });
 
 When('providing valid username as {string}, password as {string} and submit', async function (name, password) {
-    await page.locator("//input[@placeholder='User Name']").fill(name);
-    await page.locator("//input[@placeholder='Password']").fill(password);
-    await page.locator("//button[@type='submit']").click();
-    setDefaultTimeout(10000);
-    await page.locator("//button[@class='swal2-confirm swal2-styled']").click();
-    setDefaultTimeout(30000);
+  await this.loginPage.login(name, password);
 });
-
 
 Then('checking is Login Successfully find', async function () {
-  const title = await page.title();
+  const title = await this.page.title();
   console.log("Page title:", title);
-  await expect(page).toHaveTitle(/Dashboard/i, { timeout: 20000 }); // regex makes it case-insensitive
+  await expect(this.page).toHaveTitle(/Dashboard/i, { timeout: 20000 }); // regex makes it case-insensitive
 });
 
-
 Then('select inventory dropdown and select Sales invoice option', async function () {
-  await page.waitForLoadState('networkidle');
-  const getDropdown =  await page.locator("#col-left > div > div > ul > li:nth-child(4) > a > span");
-  // console.log("Dropdown element text:", await getDropdown.textContent());
-  expect(getDropdown).toHaveText('Inventory'); 
-  const isVisible = await getDropdown.isVisible();
-  console.log("Is Inventory dropdown visible?:", isVisible);
-  await getDropdown.click();  
-  const getSubOption =  await page.locator("#col-left > div > div > ul > li:nth-child(4) > ul > li:nth-child(7) > a");
+  await this.page.waitForLoadState('networkidle');
+  const getDropdown = this.loginPage.inventoryMenuDropdown;
+  await expect(getDropdown).toHaveText('Inventory');
+  await expect(getDropdown).toBeVisible();
+  await getDropdown.click();
+
+  const getSubOption = this.loginPage.salesInvoiceOption;
   const attributes = await getSubOption.evaluate(el => {
     const attrs = {};
     for (const attr of el.attributes) {
@@ -53,75 +43,53 @@ Then('select inventory dropdown and select Sales invoice option', async function
     }
     return attrs;
   });
-  
-  console.log("Sales Invoice option href:", attributes);
   const hrefValue = await getSubOption.getAttribute('href');
   expect(hrefValue).toContain('/ng/inventory/sale/list');
   await getSubOption.click();
-  await page.waitForLoadState('networkidle');
-  const currentUrl = page.url();
+  await this.page.waitForLoadState('networkidle');
+  const currentUrl = this.page.url();
   expect(currentUrl).toContain('/ng/inventory/sale/list');
 });
 
 Then('enter sale no 57 and press enter seacrh button', async function () {
-
-  const getSaleInput = await page.locator("input[placeholder='Sale #']");
-  
-  await getSaleInput.fill('57');
-  await getSaleInput.press('Enter');
-  await page.waitForLoadState('networkidle');
-
-  await getSaleInput.fill('');
-
-  await getSaleInput.fill('45');
-  await getSaleInput.press('Enter');
-  await page.waitForLoadState('networkidle');
-
-  await getSaleInput.fill('');
-
-  await getSaleInput.fill('10');
-  await getSaleInput.press('Enter');
-  await page.waitForLoadState('networkidle');
-
+  const getSaleInput = this.loginPage.saleNoFilterInput;
+  await this.loginPage.setText(getSaleInput, '57');
+  await this.loginPage.setText(getSaleInput, '');
+  await this.loginPage.setText(getSaleInput, '45');
+  await this.loginPage.setText(getSaleInput, '');
+  await this.loginPage.setText(getSaleInput, '10');
 });
 
-
 Then('click new button to create new sales invoice', async function () {
-
-  const newSaleBtn = await page.locator("a[href='/ng/inventory/sale']");
-  await newSaleBtn.click();
-  await page.waitForLoadState('networkidle');
-  const currentUrl = page.url();
+  const newSaleBtn = this.loginPage.newSaleBtn;
+  await this.loginPage.click(newSaleBtn);
+  const currentUrl = this.page.url();
   expect(currentUrl).toContain('/ng/inventory/sale');
 });
 
 Then('enter one item and press post button to save sales invoice', async function () {
-
-const getItemInputDropdown = page.locator("ng-select[placeholder='Select Product'] input[role='combobox']");
-  await getItemInputDropdown.click();
-    const selectFirstOption = page.locator("//span[@class='ng-option-label'][normalize-space()='-02 - hello']");
-    await selectFirstOption.click();
-    await page.waitForLoadState('networkidle');
+  await this.loginPage.click(this.loginPage.getItemInputDropdown);
+  await this.loginPage.click(this.loginPage.selectFirstOption);
 });
 
 Then('press list button to go sales invoice list page', async function () {
-
-    const postSaleBtn = page.locator("button.btn-success");
-    await postSaleBtn.click();
-    await page.waitForLoadState('networkidle');
-    const listButton = page.getByRole('link', { name: 'List' });
-    await listButton.click();
-    await page.waitForLoadState('networkidle');
-
+  await this.loginPage.click(this.loginPage.postSaleBtn);
+  await this.loginPage.click(this.loginPage.listBtn);
 });
 
 Then('filter out that sale which you created just now and verify it exists in list page', async function () {
+  await this.loginPage.setText(this.loginPage.saleNoFilterInput, '50');
+});
 
-    const getSaleInput = await page.locator("input[placeholder='Sale #']");
-  await getSaleInput.fill('50');
-  await getSaleInput.press('Enter');
-  await page.waitForLoadState('networkidle');
+Then('logout from application', async function () {
+  await this.loginPage.click(this.loginPage.logoutDropdown);
+  await this.loginPage.click(this.loginPage.logoutBtn);
+});
 
-  await page.close();
-  await browser.close();
+Then('again login with same user', async function () {
+  await this.loginPage.login('ahmad.support', '123');
+  await this.page.title();
+  await expect(this.page).toHaveTitle(/Dashboard/i, { timeout: 20000 }); // regex makes it case-insensitive
+  await this.page.close();
+  await this.browser.close();
 });
