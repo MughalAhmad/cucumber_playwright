@@ -33,12 +33,7 @@ When('providing valid username as {string}, password as {string} and submit', as
 Then('checking is Login Successfully find', async function () {
   const title = await page.title();
   console.log("Page title:", title);
-
-  // Wait until title is correct
   await expect(page).toHaveTitle(/Dashboard/i, { timeout: 20000 }); // regex makes it case-insensitive
-
-  // await page.close();
-  // await browser.close();
 });
 
 

@@ -36,12 +36,12 @@ pipeline {
             }
         }
 
-       stage('Publish Reports') {
-            steps {
-                echo '📊 Publishing Allure reports...'
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            }
-        }
+        // stage('Publish Reports') {
+        //     steps {
+        //         echo '📊 Publishing Allure reports...'
+        //         allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+        //     }
+        // }
 
     }
 
