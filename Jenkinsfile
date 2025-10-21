@@ -32,7 +32,7 @@ pipeline {
         stage('Run Cucumber Tests') {
             steps {
                 echo '🚀 Running Cucumber + Playwright tests...'
-                bat 'npx test cucumber-js'
+                bat 'npm test cucumber-js'
             }
         }
 
